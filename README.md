@@ -17,7 +17,7 @@ chudinanton Platform repository
 
 Ответ:
 <pre>
-kube-scheduler, kube-controller-manager, kube-apiserver, etcd стартует блягодаря kubelet, они описаны в манифестах /etc/kubernetes/manifests
+kube-scheduler, kube-controller-manager, kube-apiserver, etcd стартует благодаря kubelet, они описаны в манифестах /etc/kubernetes/manifests
 Где в частности есть и проверки состояния livenessProbe
 
 Документация:
@@ -48,7 +48,7 @@ kubectl port-forward --address 0.0.0.0 pod/web 8000:8000
 - Изучение ad-hoc режима
 
 ### Дополнительное задание Hipster Shop frontend
-- Создание рабочего манифеста frontend-pod-healthy.yaml путем чтения лога и добавления нужных env. Запуск пода.
+- cd ..
 - В результате, после применения исправленного манифеста pod
 frontend должен находиться в статусе Running
 
