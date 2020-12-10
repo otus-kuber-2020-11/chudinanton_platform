@@ -1,5 +1,57 @@
 # chudinanton_platform
 chudinanton Platform repository
+## ДЗ №2
+ - [x] Основное ДЗ
+ - [x] Задание со *
+ - [x] Задание со ** 
+
+### Основное задание
+
+- Установка kind и поднятие кластера
+- Изучение ReplicaSet контроллера
+- Разворот frontend в ReplicaSet
+<pre>
+Контроллер ReplicaSet не позволяет проводить обновление pod'ов при изменении манифеста.
+</pre>
+- Изучение контроллера Deployment
+- Сборка образов paymentservice
+- Разворот paymentservice с помощью Deployment
+- Обновление Deployment paymentservice и Rollback
+- Изучение readinessProbe
+
+### Дополнительное задание №1
+- Написание двух стратегий обновления Deployment: Аналог blue-green и Reverse Rolling Update
+### Дополнительное задание №2
+- Изучение DaemonSet на примере Node Exporter и разворот на worker нодах c namespace monitoring
+<pre>
+Сдул манифест отсюда и вычистил все непонятное и лишнее на текущем этапе:
+https://github.com/prometheus-operator/kube-prometheus/blob/master/manifests/node-exporter-daemonset.yaml
+Образ взят отсюда, не стал собирать свой:
+https://hub.docker.com/r/prom/node-exporter
+</pre>
+### Дополнительное задание №3
+- Развернул Node Exporter на мастерах используя соответствующий допуск самому поду:
+<pre>
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: "Exists"
+        effect: NoSchedule
+</pre>
+
+Результат:
+<pre>
+# kubectl get daemonsets,pods -n monitoring                                                             
+NAME                           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+daemonset.apps/node-exporter   6         6         6       6            6           <none>          101s
+
+NAME                      READY   STATUS    RESTARTS   AGE
+pod/node-exporter-2wdsh   1/1     Running   0          101s
+pod/node-exporter-4drt9   1/1     Running   0          101s
+pod/node-exporter-5kp8f   1/1     Running   0          101s
+pod/node-exporter-blq6x   1/1     Running   0          101s
+pod/node-exporter-mq8x6   1/1     Running   0          101s
+pod/node-exporter-q6d2x   1/1     Running   0          101s
+</pre>
 
 ## ДЗ №1
  - [x] Основное ДЗ

@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: node-exporter
+  labels:
+    app: monitoring
+  namespace: monitoring
+spec:
+  selector:
+    matchLabels:
+      app: monitoring
+  template:
+    metadata:
+      name: node-exporter
+      labels:
+        app: monitoring
+    spec:
+      containers:
+        - name: node-exporter
+          image: prom/node-exporter:latest
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        operator: "Exists"
+        effect: NoSchedule
